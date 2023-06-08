@@ -1,0 +1,73 @@
+[
+    {
+      "Name": "Oil Painting Fundamentals",
+      "Instructor": "John Smith",
+      "Available-seats": 15,
+      "Price": 250,
+      "Image": "https://i.ibb.co/KK8qchg/Oil-Painting-Fundamentals.webp"
+    },
+    {
+      "Name": "Figure Drawing Intensive",
+      "Instructor": "Sarah Johnson",
+      "Available-seats": 10,
+      "Price": 300,
+      "Image": "https://i.ibb.co/BTyYDwy/Figure-Drawing-Intensive.jpg"
+    },
+    {
+      "Name": "Watercolor Techniques",
+      "Instructor": "Emily Thompson",
+      "Available-seats": 12,
+      "Price": 200,
+      "Image": "https://i.ibb.co/xJzYvkT/Watercolor-Techniques.jpg"
+    },
+    {
+      "Name": "Sculpting Workshop",
+      "Instructor": "Michael Davis",
+      "Available-seats": 8,
+      "Price": 400,
+      "Image": "https://i.ibb.co/fMx4tgT/Sculpting-Workshop.jpg"
+    },
+    {
+      "Name": "Digital Art for Beginners",
+      "Instructor": "Alexandra Garcia",
+      "Available-seats": 20,
+      "Price": 150,
+      "Image": "https://i.ibb.co/80qHF1f/Digital-Art-for-Beginners.jpg"
+    },
+    {
+      "Name": "Photography Masterclass",
+      "Instructor": "Robert Wilson",
+      "Available-seats": 15,
+      "Price": 350,
+      "Image": "https://i.ibb.co/wrwzbP7/Photography-Masterclass.jpg"
+    },
+    {
+      "Name": "Printmaking Techniques",
+      "Instructor": "Elizabeth Baker",
+      "Available-seats": 10,
+      "Price": 280,
+      "Image": "https://i.ibb.co/bgTRp7f/Printmaking-Techniques.jpg"
+    },
+    {
+      "Name": "Mixed Media Explorations",
+      "Instructor": "Daniel Lee",
+      "Available-seats": 12,
+      "Price": 220,
+      "Image": "https://i.ibb.co/3hD7GtM/Mixed-Media-Explorations.jpg"
+    },
+    {
+      "Name": "Art History: From Renaissance to Modernism",
+      "Instructor": "Julia Thompson",
+      "Available-seats": 15,
+      "Price": 180,
+      "Image": "https://i.ibb.co/LnwWTdb/From-Renaissance-to-Modernism.jpg"
+    },
+    {
+      "Name": "Graphic Design Essentials",
+      "Instructor": "Ryan Anderson",
+      "Available-seats": 18,
+      "Price": 280,
+      "Image": "https://i.ibb.co/BV8ZtrT/8fefc8048faab45f4eb13c3e24fa349b.png"
+    }
+  ]
+  
