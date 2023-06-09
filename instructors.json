@@ -1,0 +1,73 @@
+[
+    {
+      "name": "John Smith",
+      "email": "johnsmith@example.com",
+      "image": "https://i.ibb.co/Dt7164h/teachers1.jpg",
+      "numberOfClasses": 3,
+      "classesTaken": ["Oil Painting Fundamentals", "Figure Drawing Intensive", "Printmaking Techniques"]
+    },
+    {
+      "name": "Sarah Johnson",
+      "email": "sarahjohnson@example.com",
+      "image": "https://i.ibb.co/60f76cY/teachers2.jpg",
+      "numberOfClasses": 2,
+      "classesTaken": ["Figure Drawing Intensive", "Digital Art for Beginners"]
+    },
+    {
+      "name": "Emily Thompson",
+      "email": "emilythompson@example.com",
+      "image": "https://i.ibb.co/xM35hNr/teachers8.jpg",
+      "numberOfClasses": 1,
+      "classesTaken": ["Watercolor Techniques"]
+    },
+    {
+      "name": "Michael Davis",
+      "email": "michaeldavis@example.com",
+      "image": "https://i.ibb.co/w7j7szD/teachers3.jpg",
+      "numberOfClasses": 1,
+      "classesTaken": ["Sculpting Workshop"]
+    },
+    {
+      "name": "Alexandra Garcia",
+      "email": "alexandragarcia@example.com",
+      "image": "https://i.ibb.co/pbysM5S/teachers4.jpg",
+      "numberOfClasses": 1,
+      "classesTaken": ["Digital Art for Beginners"]
+    },
+    {
+      "name": "Robert Wilson",
+      "email": "robertwilson@example.com",
+      "image": "https://i.ibb.co/ZLWqTL5/teachers5.jpg",
+      "numberOfClasses": 1,
+      "classesTaken": ["Photography Masterclass"]
+    },
+    {
+      "name": "Elizabeth Baker",
+      "email": "elizabethbaker@example.com",
+      "image": "https://i.ibb.co/Rz54Zns/teachers7.jpg",
+      "numberOfClasses": 1,
+      "classesTaken": ["Printmaking Techniques"]
+    },
+    {
+      "name": "Daniel Lee",
+      "email": "daniellee@example.com",
+      "image": "https://i.ibb.co/Nts5yjs/teachers9.jpg",
+      "numberOfClasses": 1,
+      "classesTaken": ["Mixed Media Explorations"]
+    },
+    {
+      "name": "Julia Thompson",
+      "email": "juliathompson@example.com",
+      "image": "https://i.ibb.co/j5Z1hb6/teachers6.jpg",
+      "numberOfClasses": 1,
+      "classesTaken": ["Art History: From Renaissance to Modernism"]
+    },
+    {
+      "name": "Ryan Anderson",
+      "email": "ryananderson@example.com",
+      "image": "https://i.ibb.co/5TZ8SyL/teachers10.jpg",
+      "numberOfClasses": 1,
+      "classesTaken": ["Graphic Design Essentials"]
+    }
+  ]
+  

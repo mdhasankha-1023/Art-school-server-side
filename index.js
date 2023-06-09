@@ -30,14 +30,50 @@ async function run() {
 
     // database collection
     const classCollection = client.db('artSchoolDB').collection('classes');
+    const instructorCollection = client.db('artSchoolDB').collection('instructors');
+    const addClassCollection = client.db('artSchoolDB').collection('addClasses')
 
 
     // -------------------
     //    classes api 
     // -------------------
     app.get('/classes', async(req, res)=> {
-        const result = await classCollection.find().toArray();
+        const result = await classCollection.find().sort({NumberOfStudents: -1}).toArray()
         res.send(result)
+    })
+
+    app.get('/stat', async(req, res)=> {
+      const result = await classCollection.aggregate([
+        {
+          $group: {
+            _id: null,
+            totalStudents: { $sum: '$NumberOfStudents' },
+            AvailableSeats: { $sum: '$Available-seats' }
+          }
+        }
+      ]).toArray()
+      res.send({result})
+    })
+
+    // ----------------------
+    //   Add-class Api
+    // ----------------------
+    app.post('/added-classes', async(req, res)=> {
+      const addedClass = req.body;
+      const result = await addClassCollection.insertOne(addedClass);
+      res.send(result) 
+    })
+
+
+
+
+
+    // ---------------------
+    //   instructors Api
+    // ---------------------
+    app.get('/instructors', async(req, res)=> {
+      const result = await instructorCollection.find().toArray();
+      res.send(result)
     })
 
 
