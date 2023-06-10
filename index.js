@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const stripe = require('stripe')(process.env.ONLINE_PAYMENT_PK)
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 require('dotenv').config()
@@ -33,6 +34,23 @@ async function run() {
     const instructorCollection = client.db('artSchoolDB').collection('instructors');
     const addClassCollection = client.db('artSchoolDB').collection('addClasses')
 
+    // create online payment api
+    app.post('/create-payment-intent', async(req, res)=> {
+      const {price} = req.body;
+      const amount = price * 100;
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: amount,
+        currency: 'usd',
+        payment_method_types: ["card"]
+      });
+      res.send({
+        clientSecret: paymentIntent.client_secret,
+      })
+    })
+
+
+
+
 
     // -------------------
     //    classes api 
@@ -58,10 +76,22 @@ async function run() {
     // ----------------------
     //   Add-class Api
     // ----------------------
-    app.post('/added-classes', async(req, res)=> {
+    app.post('/added-class', async(req, res)=> {
       const addedClass = req.body;
       const result = await addClassCollection.insertOne(addedClass);
       res.send(result) 
+    })
+
+    app.get('/added-class', async(req, res)=> {
+      const result = await addClassCollection.find().toArray();
+      res.send(result)
+    })
+
+    app.delete('/added-class/:id', async(req, res)=> {
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await addClassCollection.deleteOne(query);
+      res.send(result)
     })
 
 
