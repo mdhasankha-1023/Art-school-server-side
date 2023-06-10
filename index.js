@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+var jwt = require('jsonwebtoken');
 const stripe = require('stripe')(process.env.ONLINE_PAYMENT_PK)
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
@@ -10,6 +11,24 @@ const port = process.env.PORT || 5000;
 // middle-were
 app.use(cors())
 app.use(express.json())
+
+// jwt-middle-were
+const jwtVerify = (req, res, next) => {
+  const Authorization = req.headers.authorization;
+  if(!Authorization){
+    return res.status(401).send({error: true, message: 'unAuthorized user'})
+  }
+
+  const token = Authorization.split(' ')[1];
+
+  jwt.verify(token, process.env.JWT_SECRET_TOKEN, (err, decoded) => {
+    if(err){
+      return res.status(401).send({error: true, message: 'unAuthorized access'})
+    }
+    req.decoded = decoded;
+    next();
+  })
+}
 
 
 // connect mongodb
@@ -32,22 +51,50 @@ async function run() {
     // database collection
     const classCollection = client.db('artSchoolDB').collection('classes');
     const instructorCollection = client.db('artSchoolDB').collection('instructors');
-    const addClassCollection = client.db('artSchoolDB').collection('addClasses')
+    const addClassCollection = client.db('artSchoolDB').collection('addClasses');
+    const userCollection = client.db('artSchoolDB').collection('user');
 
-    // create online payment api
-    app.post('/create-payment-intent', async(req, res)=> {
-      const {price} = req.body;
-      const amount = price * 100;
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: amount,
-        currency: 'usd',
-        payment_method_types: ["card"]
-      });
-      res.send({
-        clientSecret: paymentIntent.client_secret,
-      })
+
+    // jwt route
+    app.post('/jwt', (req, res)=> {
+      const user = req.body;
+      const token = jwt.sign(user, process.env.JWT_SECRET_TOKEN, {expiresIn: '1h'})
+      res.send({token})
     })
 
+
+
+
+    // // // create online payment api
+    // app.post('/create-payment-intent', async(req, res)=> {
+    //   const {price} = req.body;
+    //   console.log(price)
+    //   const amount = price * 100;
+    //   const paymentIntent = await stripe.paymentIntents.create({
+    //     amount: amount,
+    //     currency: 'usd',
+    //     payment_method_types: ["card"]
+    //   });
+    //   res.send({
+    //     clientSecret: paymentIntent.client_secret,
+    //   })
+    // })
+
+
+
+    // -------------------
+    //    user api
+    // -------------------
+      app.post('/users', async(req, res)=> {
+        const user = req.body;
+        const query = {email: user.email}
+        const existingUser = await userCollection.findOne(query);
+        if(existingUser){
+          res.send({message: 'Already have an account'})
+        }
+        const result = await userCollection.insertOne(user);
+        res.send(result)
+      })
 
 
 
@@ -76,14 +123,33 @@ async function run() {
     // ----------------------
     //   Add-class Api
     // ----------------------
-    app.post('/added-class', async(req, res)=> {
+    app.post('/added-classes', async(req, res)=> {
       const addedClass = req.body;
       const result = await addClassCollection.insertOne(addedClass);
       res.send(result) 
     })
 
-    app.get('/added-class', async(req, res)=> {
-      const result = await addClassCollection.find().toArray();
+    // get by email
+    app.get('/added-classes', jwtVerify,  async(req, res)=> {
+      const email = req.query.email;
+      if(!email){
+        res.send([])
+      }
+
+      if (email !== req.decoded.email) {
+        return res.status(403).send({ error: true, message: 'forbidden access' })
+      }
+
+      const filter = {email: email}
+      const result = await addClassCollection.find(filter).toArray();
+      res.send(result)
+    })
+
+    // get by id
+    app.get('/added-class/:id', async(req, res)=> {
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)}
+      const result = await addClassCollection.findOne(filter);
       res.send(result)
     })
 
