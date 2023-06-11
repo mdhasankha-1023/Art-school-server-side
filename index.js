@@ -18,7 +18,6 @@ const jwtVerify = (req, res, next) => {
   if(!Authorization){
     return res.status(401).send({error: true, message: 'unAuthorized user'})
   }
-
   const token = Authorization.split(' ')[1];
 
   jwt.verify(token, process.env.JWT_SECRET_TOKEN, (err, decoded) => {
@@ -81,6 +80,7 @@ async function run() {
     // })
 
 
+    
 
     // -------------------
     //    user api
@@ -102,7 +102,7 @@ async function run() {
     // -------------------
     //    classes api 
     // -------------------
-    app.get('/classes', async(req, res)=> {
+    app.get('/classes',  async(req, res)=> {
         const result = await classCollection.find().sort({NumberOfStudents: -1}).toArray()
         res.send(result)
     })
@@ -118,6 +118,23 @@ async function run() {
         }
       ]).toArray()
       res.send({result})
+    })
+
+    // add to class
+    app.post('/classes',  async(req, res)=> {
+      const classInfo = req.body;
+      // console.log(classInfo)
+      const result = await classCollection.insertOne(classInfo);
+      res.send(result)
+    })
+
+    // get single class by email
+    app.get('/classes/:email', jwtVerify, async(req, res)=> {
+      const email = req.params.email;
+      console.log(email)
+      const filter = {email: email}
+      const result = await classCollection.find(filter).toArray();
+      res.send(result)
     })
 
     // ----------------------

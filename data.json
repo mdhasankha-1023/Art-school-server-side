@@ -1,83 +1,103 @@
 [
     {
-      "Name": "Oil Painting Fundamentals",
-      "Instructor": "John Smith",
-      "Available-seats": 15,
-      "NumberOfStudents" : 50,
-      "Price": 250,
-      "Image": "https://i.ibb.co/KK8qchg/Oil-Painting-Fundamentals.webp"
+      "className": "Oil Painting Fundamentals",
+      "name": "John Smith",
+      "email": "johnsmith@example.com",
+      "availableSeat": 15,
+      "numberOfStudents" : 50,
+      "price": 250,
+      "classImg": "https://i.ibb.co/KK8qchg/Oil-Painting-Fundamentals.webp",
+      "status" : "approved"
     },
     {
-      "Name": "Figure Drawing Intensive",
-      "Instructor": "Sarah Johnson",
-      "Available-seats": 10,
-      "NumberOfStudents" : 40,
-      "Price": 300,
-      "Image": "https://i.ibb.co/BTyYDwy/Figure-Drawing-Intensive.jpg"
+      "className": "Figure Drawing Intensive",
+      "name": "Sarah Johnson",
+      "email": "sarahjohnson@example.com",
+      "availableSeat": 10,
+      "numberOfStudents" : 40,
+      "price": 300,
+      "classImg": "https://i.ibb.co/BTyYDwy/Figure-Drawing-Intensive.jpg",
+      "status" : "approved"
     },
     {
-      "Name": "Watercolor Techniques",
-      "Instructor": "Emily Thompson",
-      "Available-seats": 12,
-      "NumberOfStudents" : 30,
-      "Price": 200,
-      "Image": "https://i.ibb.co/xJzYvkT/Watercolor-Techniques.jpg"
+      "className": "Watercolor Techniques",
+      "name": "Emily Thompson",
+      "email": "emilythompson@example.com",
+      "availableSeat": 12,
+      "numberOfStudents" : 30,
+      "price": 200,
+      "classImg": "https://i.ibb.co/xJzYvkT/Watercolor-Techniques.jpg",
+      "status" : "approved"
     },
     {
-      "Name": "Sculpting Workshop",
-      "Instructor": "Michael Davis",
-      "Available-seats": 8,
-      "NumberOfStudents" : 10,
-      "Price": 400,
-      "Image": "https://i.ibb.co/fMx4tgT/Sculpting-Workshop.jpg"
+      "className": "Sculpting Workshop",
+      "name": "Michael Davis",
+      "email": "michaeldavis@example.com",
+      "availableSeat": 8,
+      "numberOfStudents" : 10,
+      "price": 400,
+      "classImg": "https://i.ibb.co/fMx4tgT/Sculpting-Workshop.jpg",
+      "status" : "approved"
     },
     {
-      "Name": "Digital Art for Beginners",
-      "Instructor": "Alexandra Garcia",
-      "Available-seats": 20,
-      "NumberOfStudents" : 20,
-      "Price": 150,
-      "Image": "https://i.ibb.co/80qHF1f/Digital-Art-for-Beginners.jpg"
+      "className": "Digital Art for Beginners",
+      "name": "Alexandra Garcia",
+      "email": "alexandragarcia@example.com",
+      "availableSeat": 20,
+      "numberOfStudents" : 20,
+      "price": 150,
+      "classImg": "https://i.ibb.co/80qHF1f/Digital-Art-for-Beginners.jpg",
+      "status" : "approved"
     },
     {
-      "Name": "Photography Masterclass",
-      "Instructor": "Robert Wilson",
-      "Available-seats": 15,
-      "NumberOfStudents" : 30,
-      "Price": 350,
-      "Image": "https://i.ibb.co/wrwzbP7/Photography-Masterclass.jpg"
+      "className": "Photography Masterclass",
+      "name": "Robert Wilson",
+      "email": "robertwilson@example.com",
+      "availableSeat": 15,
+      "numberOfStudents" : 30,
+      "price": 350,
+      "classImg": "https://i.ibb.co/wrwzbP7/Photography-Masterclass.jpg",
+      "status" : "approved"
     },
     {
-      "Name": "Printmaking Techniques",
-      "Instructor": "Elizabeth Baker",
-      "Available-seats": 10,
-      "NumberOfStudents" : 60,
-      "Price": 280,
-      "Image": "https://i.ibb.co/bgTRp7f/Printmaking-Techniques.jpg"
+      "className": "Printmaking Techniques",
+      "name": "Elizabeth Baker",
+      "email": "elizabethbaker@example.com",
+      "availableSeat": 10,
+      "numberOfStudents" : 60,
+      "price": 280,
+      "classImg": "https://i.ibb.co/bgTRp7f/Printmaking-Techniques.jpg",
+      "status" : "approved"
     },
     {
-      "Name": "Mixed Media Explorations",
-      "Instructor": "Daniel Lee",
-      "Available-seats": 12,
-      "NumberOfStudents" : 22,
-      "Price": 220,
-      "Image": "https://i.ibb.co/3hD7GtM/Mixed-Media-Explorations.jpg"
+      "className": "Mixed Media Explorations",
+      "name": "Daniel Lee",
+      "email": "daniellee@example.com",
+      "availableSeat": 12,
+      "numberOfStudents" : 22,
+      "price": 220,
+      "classImg": "https://i.ibb.co/3hD7GtM/Mixed-Media-Explorations.jpg",
+      "status" : "approved"
     },
     {
-      "Name": "Art History: From Renaissance to Modernism",
-      "Instructor": "Julia Thompson",
-      "Available-seats": 15,
-      "NumberOfStudents" : 45,
-      "Price": 180,
-      "Image": "https://i.ibb.co/LnwWTdb/From-Renaissance-to-Modernism.jpg"
+      "className": "Art History: From Renaissance to Modernism",
+      "name": "Julia Thompson",
+      "email": "juliathompson@example.com",
+      "availableSeat": 15,
+      "numberOfStudents" : 45,
+      "price": 180,
+      "classImg": "https://i.ibb.co/LnwWTdb/From-Renaissance-to-Modernism.jpg",
+      "status" : "approved"
     },
     {
-      "Name": "Graphic Design Essentials",
-      "Instructor": "Ryan Anderson",
-      "Available-seats": 18,
-      "NumberOfStudents" : 35,
-      "Price": 280,
-      "Image": "https://i.ibb.co/BV8ZtrT/8fefc8048faab45f4eb13c3e24fa349b.png"
+      "className": "Graphic Design Essentials",
+      "name": "Ryan Anderson",
+      "email": "ryananderson@example.com",
+      "availableSeat": 18,
+      "numberOfStudents" : 35,
+      "price": 280,
+      "classImg": "https://i.ibb.co/BV8ZtrT/8fefc8048faab45f4eb13c3e24fa349b.png",
+      "status" : "approved"
     }
   ]
   
