@@ -131,10 +131,25 @@ async function run() {
     // get single class by email
     app.get('/classes/:email', jwtVerify, async(req, res)=> {
       const email = req.params.email;
-      console.log(email)
       const filter = {email: email}
       const result = await classCollection.find(filter).toArray();
       res.send(result)
+    })
+
+    // update single class by id
+    app.put('/classes/:id', jwtVerify, async(req, res)=> {
+      const id = req.params.id;
+      const adminFeedback = req.body.adminFeedback;
+      console.log(adminFeedback)
+      // const filter = {_id: new ObjectId(id)}
+      // const option = {upsert : true}
+      // const updatedInfo = {
+      //     $set: {
+      //       feedback:
+      //     }
+      // }
+      // const result = await classCollection.find(filter).toArray();
+      // res.send(result)
     })
 
     // ----------------------
