@@ -90,15 +90,26 @@ async function run() {
         const query = {email: user.email}
         const existingUser = await userCollection.findOne(query);
         if(existingUser){
-          res.send({message: 'Already have an account'})
+          return res.send({message: 'Already have an account'})
         }
         const result = await userCollection.insertOne(user);
         res.send(result)
       })
 
       // get all user
-      app.get('/users',  async(req, res)=> {
+      app.get('/users', jwtVerify, async(req, res)=> {
         const result = await userCollection.find().toArray();
+        res.send(result)
+      })
+
+      // update single user
+      app.patch('/users/:id', async(req, res) => {
+        const id = req.params.id;
+        const modifiedUserRole = req.query.role;
+        const newRole = modifiedUserRole === 'instructor' ? 'instructor' : 'admin';
+        
+        const filter = {_id: new ObjectId(id)}
+        const result = await userCollection.updateOne(filter, {$set: {role: newRole}})
         res.send(result)
       })
 
