@@ -106,10 +106,13 @@ async function run() {
       app.patch('/users/:id', async(req, res) => {
         const id = req.params.id;
         const modifiedUserRole = req.query.role;
-        const newRole = modifiedUserRole === 'instructor' ? 'instructor' : 'admin';
-        
+        const updatedInfo = {
+          $set: {
+            role: modifiedUserRole === 'instructor' ? 'instructor' : 'admin'
+          }
+        }
         const filter = {_id: new ObjectId(id)}
-        const result = await userCollection.updateOne(filter, {$set: {role: newRole}})
+        const result = await userCollection.updateOne(filter, updatedInfo)
         res.send(result)
       })
 
