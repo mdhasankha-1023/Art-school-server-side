@@ -102,6 +102,14 @@ async function run() {
         res.send(result)
       })
 
+      // get single by email
+      app.get('/users/:email', jwtVerify, async(req, res)=> {
+        const email = req.params.email;
+        const filter = {email: email}
+        const result = await userCollection.findOne(filter);
+        res.send(result)
+      })
+
       // update single user
       app.patch('/users/:id', async(req, res) => {
         const id = req.params.id;
@@ -143,7 +151,6 @@ async function run() {
     // add to class
     app.post('/classes',  async(req, res)=> {
       const classInfo = req.body;
-      // console.log(classInfo)
       const result = await classCollection.insertOne(classInfo);
       res.send(result)
     })
@@ -157,19 +164,18 @@ async function run() {
     })
 
     // update single class by id
-    app.put('/classes/:id', jwtVerify, async(req, res)=> {
+    app.put('/classes/:id', async(req, res)=> {
       const id = req.params.id;
-      const adminFeedback = req.body.adminFeedback;
-      console.log(adminFeedback)
-      // const filter = {_id: new ObjectId(id)}
-      // const option = {upsert : true}
-      // const updatedInfo = {
-      //     $set: {
-      //       feedback:
-      //     }
-      // }
-      // const result = await classCollection.find(filter).toArray();
-      // res.send(result)
+      const adminStatus = req.query.status;
+      const filter = {_id: new ObjectId(id)}
+      const option = {upsert : true}
+      const updatedInfo = {
+          $set: {
+            status: adminStatus === 'deny' ? 'deny' : 'approved'
+          }
+      }
+      const result = await classCollection.updateOne(filter, updatedInfo, option);
+      res.send(result)
     })
 
     // ----------------------
@@ -211,9 +217,6 @@ async function run() {
       const result = await addClassCollection.deleteOne(query);
       res.send(result)
     })
-
-
-
 
 
     // ---------------------
