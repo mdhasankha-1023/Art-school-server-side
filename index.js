@@ -105,6 +105,7 @@ async function run() {
       // get single by email
       app.get('/users/:email', jwtVerify, async(req, res)=> {
         const email = req.params.email;
+        // console.log(email)
         const filter = {email: email}
         const result = await userCollection.findOne(filter);
         res.send(result)
@@ -164,14 +165,30 @@ async function run() {
     })
 
     // update single class by id
-    app.put('/classes/:id', async(req, res)=> {
+    app.patch('/classes/:id', async(req, res)=> {
       const id = req.params.id;
       const adminStatus = req.query.status;
+      console.log(id, adminStatus)
+      const filter = {_id: new ObjectId(id)}
+      const updatedInfo = {
+          $set: {
+            status: adminStatus === 'deny' ? 'deny' : 'approved'
+          }
+      }
+      const result = await classCollection.updateOne(filter, updatedInfo);
+      res.send(result)
+    })
+
+    // update feedback single class by id
+    app.put('/classes/:id', async(req, res)=> {
+      const id = req.params.id;
+      const adminFeedback = req.body.feedback;
+      // console.log(adminFeedback)
       const filter = {_id: new ObjectId(id)}
       const option = {upsert : true}
       const updatedInfo = {
           $set: {
-            status: adminStatus === 'deny' ? 'deny' : 'approved'
+            adminFeedback: adminFeedback
           }
       }
       const result = await classCollection.updateOne(filter, updatedInfo, option);
