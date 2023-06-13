@@ -52,6 +52,7 @@ async function run() {
     const instructorCollection = client.db('artSchoolDB').collection('instructors');
     const addClassCollection = client.db('artSchoolDB').collection('addClasses');
     const userCollection = client.db('artSchoolDB').collection('user');
+    const paymentCollection = client.db('artSchoolDB').collection('payments')
 
 
     // jwt route
@@ -62,7 +63,7 @@ async function run() {
     })
 
 
-     // create online payment api
+     // create online payment intent
     app.post('/create-payment-intent', jwtVerify,  async(req, res)=> {
       const {totalPrice} = req.body;
       // console.log(totalPrice)
@@ -77,6 +78,15 @@ async function run() {
         clientSecret: paymentIntent.client_secret
       })
     })
+
+    // payment info post api
+    app.post('/payments', jwtVerify, async(req, res)=> {
+      const paymentInfo = req.body;
+      const result = await paymentCollection.insertOne(paymentInfo);
+      res.send(result);
+    })
+
+
 
 
     
