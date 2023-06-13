@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 var jwt = require('jsonwebtoken');
-const stripe = require('stripe')(process.env.ONLINE_PAYMENT_PK)
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 require('dotenv').config()
+const stripe = require('stripe')(process.env.ONLINE_PAYMENT_PK)
 const port = process.env.PORT || 5000;
 
 
@@ -62,22 +62,21 @@ async function run() {
     })
 
 
+     // create online payment api
+    app.post('/create-payment-intent', jwtVerify,  async(req, res)=> {
+      const {totalPrice} = req.body;
+      // console.log(totalPrice)
+      const amount = totalPrice * 100;
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: amount,
+        currency: 'usd',
+        payment_method_types: ['card'],
+      });
 
-
-    // // // create online payment api
-    // app.post('/create-payment-intent', async(req, res)=> {
-    //   const {price} = req.body;
-    //   console.log(price)
-    //   const amount = price * 100;
-    //   const paymentIntent = await stripe.paymentIntents.create({
-    //     amount: amount,
-    //     currency: 'usd',
-    //     payment_method_types: ["card"]
-    //   });
-    //   res.send({
-    //     clientSecret: paymentIntent.client_secret,
-    //   })
-    // })
+      res.send({
+        clientSecret: paymentIntent.client_secret
+      })
+    })
 
 
     
@@ -132,7 +131,7 @@ async function run() {
     //    classes api 
     // -------------------
     app.get('/classes',  async(req, res)=> {
-        const result = await classCollection.find().sort({NumberOfStudents: -1}).toArray()
+        const result = await classCollection.find().sort({numberOfStudents: -1}).toArray()
         res.send(result)
     })
 
@@ -180,7 +179,7 @@ async function run() {
     })
 
     // update feedback single class by id
-    app.put('/classes/:id', async(req, res)=> {
+    app.put('/classes/:id', async(req, res)=> { 
       const id = req.params.id;
       const adminFeedback = req.body.feedback;
       // console.log(adminFeedback)
@@ -208,7 +207,7 @@ async function run() {
     app.get('/added-classes', jwtVerify,  async(req, res)=> {
       const email = req.query.email;
       if(!email){
-        res.send([])
+        return res.send([])
       }
 
       if (email !== req.decoded.email) {
@@ -221,7 +220,7 @@ async function run() {
     })
 
     // get by id
-    app.get('/added-class/:id', async(req, res)=> {
+    app.get('/added-classes/:id', jwtVerify, async(req, res)=> {
       const id = req.params.id;
       const filter = {_id: new ObjectId(id)}
       const result = await addClassCollection.findOne(filter);
