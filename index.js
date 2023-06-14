@@ -65,9 +65,9 @@ async function run() {
 
      // create online payment intent
     app.post('/create-payment-intent', jwtVerify,  async(req, res)=> {
-      const {totalPrice} = req.body;
-      // console.log(totalPrice)
-      const amount = totalPrice * 100;
+      const {Price} = req.body;
+      // console.log(Price) 
+      const amount = Price * 100;
       const paymentIntent = await stripe.paymentIntents.create({
         amount: amount,
         currency: 'usd',
@@ -85,6 +85,12 @@ async function run() {
       const result = await paymentCollection.insertOne(paymentInfo);
       res.send(result);
     })
+
+    // get payment info
+    app.get('/payments', jwtVerify, async(req, res) => {
+      const result = await paymentCollection.find().toArray();
+      res.send(result)
+    }) 
 
 
 
@@ -173,11 +179,11 @@ async function run() {
       res.send(result)
     })
 
+
     // update single class by id
     app.patch('/classes/:id', async(req, res)=> {
       const id = req.params.id;
-      const adminStatus = req.query.status;
-      console.log(id, adminStatus)
+      const adminStatus = req.query?.status;
       const filter = {_id: new ObjectId(id)}
       const updatedInfo = {
           $set: {
@@ -192,7 +198,6 @@ async function run() {
     app.put('/classes/:id', async(req, res)=> { 
       const id = req.params.id;
       const adminFeedback = req.body.feedback;
-      // console.log(adminFeedback)
       const filter = {_id: new ObjectId(id)}
       const option = {upsert : true}
       const updatedInfo = {
@@ -234,6 +239,20 @@ async function run() {
       const id = req.params.id;
       const filter = {_id: new ObjectId(id)}
       const result = await addClassCollection.findOne(filter);
+      res.send(result)
+    })
+
+    // patch by id
+    app.patch('/added-classes/:id', async(req, res)=> {
+      const id = req.params.id;
+      console.log(id)
+      const filter = {_id: new ObjectId(id)}
+      const updatedInfo = {
+        $set: {
+          paymentStatus: true,
+        }
+    }
+      const result = await addClassCollection.updateOne( filter ,updatedInfo);
       res.send(result)
     })
 
